@@ -15,7 +15,7 @@ class Reservation extends Model
         'end_date', 
         'guest_name', 
         'guest_email', 
-        'guest_phone'
+        'guest_phone_number'
     ];
 
     public function room() {

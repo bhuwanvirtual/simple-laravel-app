@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Room')
+@section('title', 'Reservation')
 
 @section('styles')
     <!-- DataTables -->
@@ -20,7 +20,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">All Rooms</h3>
+                        <h3 class="card-title">All Reservations</h3>
                         @if (isset($_GET['action']) && $_GET['action'] == 'filter')
                             <div style="
                                 text-align: right;
@@ -37,22 +37,28 @@
                                 <tr>
                                     <th>S.N</th>
                                     <th>Room Number</th>
-                                    <th>Type</th>
+                                    <th>Booked By</th>
+                                    <th>Booked Date</th>
+                                    <th>Check-in Date</th>
+                                    <th>Check-out Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($rooms as $key => $room)
+                                @foreach ($reservations as $key => $reservation)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $room->room_number }}</td>
-                                        <td>{{ ucfirst($room->type) }}</td>
+                                        <td>{{ $reservation->room->room_number }}</td>
+                                        <td>{{ $reservation->guest_name }}</td>
+                                        <td>{{ date('jS F Y h:i:s A', strtotime($reservation->created_at)) }}</td>
+                                        <td>{{ date('jS F Y', strtotime($reservation->start_date)) }}</td>
+                                        <td>{{ date('jS F Y', strtotime($reservation->end_date)) }}</td>
                                         <td>
-                                            <form action="{{ route('rooms.destroy', $room->id) }}" method="POST">
+                                            <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this room?')">
-                                                    <i class="fa fa-trash"></i>
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel this reservation?')">
+                                                    <i class="fa fa-ban"></i>
                                                 </button>
                                             </form>
                                         </td>
@@ -61,9 +67,12 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>S.N</th>
                                     <th>Room Number</th>
-                                    <th>Type</th>
+                                    <th>Book By</th>
+                                    <th>Book Date</th>
+                                    <th>Check-in Date</th>
+                                    <th>Check-out Date</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

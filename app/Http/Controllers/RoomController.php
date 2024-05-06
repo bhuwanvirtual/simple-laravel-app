@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,23 @@ class RoomController extends Controller
 {
     public function index()
     {
-        $rooms = Room::all();
+        if (isset($_GET['action']) && $_GET['action'] == 'filter') {
+            $startDate = $_GET['start_date'];
+            $endDate   = $_GET['end_date'];
+
+            // Get room IDs with reservations overlapping with the given date range
+            $occupiedRoomIds = Reservation::where(function ($query) use ($startDate, $endDate) {
+                $query->where('start_date', '<=', $endDate)
+                    ->where('end_date', '>=', $startDate);
+            })->pluck('room_id');
+
+            // Get available rooms by excluding the occupied room IDs
+            $rooms = Room::whereNotIn('id', $occupiedRoomIds)->get();
+
+        } else {
+            $rooms = Room::all();
+        }
+        
         return view('rooms.index', compact('rooms'));
     }
 
@@ -62,5 +79,10 @@ class RoomController extends Controller
 
         return redirect()->route('rooms.index')
                          ->with('success','Room deleted successfully');
+    }
+
+    public function check(Request $request)
+    {
+        return view('rooms.check');
     }
 }

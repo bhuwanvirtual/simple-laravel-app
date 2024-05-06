@@ -15,4 +15,8 @@ class Room extends Model
         'description'
     ];
 
+    public function reservation() {
+        return $this->belongsTo(Reservation::class);
+    }
+
 }

@@ -34,9 +34,9 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->is('rooms') || request()->is('rooms/create') ? ' menu-is-opening menu-open' : '' }}">
+                <li class="nav-item {{ request()->is('rooms') || request()->is('rooms/create') || request()->is('rooms/check') ? ' menu-is-opening menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->is('rooms') || request()->is('rooms/create') ? ' active' : '' }}">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="nav-icon fas fa-house-user"></i>
                         <p>
                             Rooms
                             <i class="right fas fa-angle-left"></i>
@@ -53,6 +53,41 @@
                             <a href="{{ route('rooms.create') }}" class="nav-link {{ request()->is('rooms/create') ? ' active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add New</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('rooms.check') }}" class="nav-link {{ request()->is('rooms/check') ? ' active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Avaibility Check</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item {{ request()->is('reservations') || request()->is('reservations/create') || request()->is('reservations/check') ? ' menu-is-opening menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('reservations') || request()->is('reservations/create') ? ' active' : '' }}">
+                        <i class="nav-icon fa fa-book"></i>
+                        <p>
+                            Reservations
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('reservations.index') }}" class="nav-link {{ request()->is('reservations') ? ' active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>All Reservations</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('reservations.create') }}" class="nav-link {{ request()->is('reservations/create') ? ' active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add New</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('reservations.check') }}" class="nav-link {{ request()->is('reservations/check') ? ' active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Check</p>
                             </a>
                         </li>
                     </ul>
