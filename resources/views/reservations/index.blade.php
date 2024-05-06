@@ -71,7 +71,8 @@
                                 <tr>
                                     <th>S.N</th>
                                     <th>Room Number</th>
-                                    <th>Book By</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
                                     <th>Book Date</th>
                                     <th>Check-in Date</th>
                                     <th>Check-out Date</th>
