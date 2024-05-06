@@ -37,7 +37,8 @@
                                 <tr>
                                     <th>S.N</th>
                                     <th>Room Number</th>
-                                    <th>Booked By</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
                                     <th>Booked Date</th>
                                     <th>Check-in Date</th>
                                     <th>Check-out Date</th>
@@ -50,6 +51,7 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $reservation->room->room_number }}</td>
                                         <td>{{ $reservation->guest_name }}</td>
+                                        <td>{{ $reservation->guest_email }}</td>
                                         <td>{{ date('jS F Y h:i:s A', strtotime($reservation->created_at)) }}</td>
                                         <td>{{ date('jS F Y', strtotime($reservation->start_date)) }}</td>
                                         <td>{{ date('jS F Y', strtotime($reservation->end_date)) }}</td>
