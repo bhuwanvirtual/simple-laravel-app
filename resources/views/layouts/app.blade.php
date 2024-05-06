@@ -41,6 +41,13 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ route('dashboard') }}" class="nav-link">Home</a>
                 </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ route('dashboard') }}" class="nav-link" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">Log out</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
             </ul>
         </nav>
         <!-- /.navbar -->
